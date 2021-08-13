@@ -13,15 +13,15 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   end
 
   allow do
-    origins 'https://willywallet.herokuapp.com/sign_up'
+    origins 'https://willywallet.herokuapp.com'
 
-    resource '*', headers: :any, methods: :any, credentials: true
+    resource '/sign_up', headers: :any, methods: :any, credentials: true
   end
 
   allow do
-    origins 'https://willywallet.herokuapp.com/sign_in'
+    origins 'https://willywallet.herokuapp.com'
 
-    resource '*', headers: :any, methods: :any, credentials: true
+    resource '/sign_in', headers: :any, methods: :any, credentials: true
   end
 
   allow do
@@ -30,15 +30,15 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     resource '*', headers: :any, methods: :any, credentials: true
   end
 
-  allow do
-    origins 'https://willywallet.herokuapp.com/transaction'
+  # allow do
+  #   origins 'https://willywallet.herokuapp.com/transaction'
 
-    resource '*', headers: :any, methods: :any, credentials: true
-  end
+  #   resource '*', headers: :any, methods: :any, credentials: true
+  # end
 
-  allow do
-    origins 'https://willywallet.herokuapp.com/logput'
+  # allow do
+  #   origins 'https://willywallet.herokuapp.com/logput'
 
-    resource '*', headers: :any, methods: :any, credentials: true
-  end
+  #   resource '*', headers: :any, methods: :any, credentials: true
+  # end
 end

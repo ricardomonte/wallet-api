@@ -9,20 +9,18 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins 'https://willywallet.herokuapp.com'
 
-    resource '/sign_up', headers: :any, methods: :any, credentials: true
-  end
+    resource '/sign_up', headers: :any, methods: :any
 
   allow do
     origins 'https://willywallet.herokuapp.com'
 
-    resource '/sign_in', headers: :any, methods: :any, credentials: true
+    resource '/sign_in', headers: :any, methods: :any
   end
 
   allow do
     origins 'https://willywallet.herokuapp.com/dashboard'
 
-    resource '*', headers: :any, methods: :any, credentials: true
-  end
+    resource '*', headers: :any, methods: :any
 
   # allow do
   #   origins 'https://willywallet.herokuapp.com/transaction'

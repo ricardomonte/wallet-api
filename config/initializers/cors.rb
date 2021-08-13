@@ -21,7 +21,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     origins 'https://willywallet.herokuapp.com/dashboard'
 
     resource '*', headers: :any, methods: :any
-
+  end
   # allow do
   #   origins 'https://willywallet.herokuapp.com/transaction'
 

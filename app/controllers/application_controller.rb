@@ -1,21 +1,30 @@
 class ApplicationController < ActionController::API
-  include ActionController::Cookies
 
-  def authentication_cookie
-    token = cookies.signed[:jwt]
-    decoded_token = JsonWebToken.decode(token)
-    if decoded_token
-      user = User.find_by(id: decoded_token['user_id'])
-    end
-    if user then return true else render json: {status: 'unauthorized', code: 401} end
+  def not_found
+    render json: {error: 'not found'}
   end
 
+
+  def authorize_request
+    header = request.header['Authorization']
+    header = header.split(' ').last if header
+    begin
+      JsonWebToken.decode(header)
+    rescue ActiveRecord::RecordNotFound => e
+      render json: {errors: e.message}, status: :unauthorized
+    rescue JWT::DecodeError => e
+      render json: {errors: e,message}, status: :unauthorized
+    end
+  end
+  
   def current_user
-    token = cookies.signed[:jwt]
-    decoded_token = JsonWebToken.decode(token)
-    if decoded_token
-      user = User.find_by(id: decoded_token['user_id'])
+    header = request.header['Authorization']
+    header = header.split(' ').last if header
+    decoded = JsonWebToken.decode(header)
+    if decoded
+      user = User.find_by(id: decoded[0]['user_id'])
     end
     if user then return user else return false end
-  end  
+  end
+
 end

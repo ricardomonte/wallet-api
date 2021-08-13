@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
-  has_one :account, class_name: "account", foreign_key: "account_id", dependent: :delete
+  has_one :account, dependent: :delete
   has_many :transactions, dependent: :destroy
   validates_presence_of :name, :lastname, :email, :password_digest
 
